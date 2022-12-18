@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="<%- process.env.GOOGLE_CLIENT_ID %>.apps.googleusercontent.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,500;0,900;1,700&display=swap"
+        rel="stylesheet">
+    <title>HealthyDiet</title>
+</head>
+
+<body class="d-flex flex-column">
+    <%- include('../partials/flash') %>
+    <div class="container-fluid">
+        <div class="row vh-100">
+            <div
+                class="col-md-3 vh-100 firstCol order-2 order-md-2 text-md-start d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex align-items-center p-1 p-md-3">
+                        <a class="navbar-brand" href="/"><img class="logo" src="/images/logoSVG.svg" alt=""></a>
+                        <h1 class="">Dashboard</h1>
+                    </div>
+                    <div class="mt-1 mt-md-3 un text-center">
+                        <h2 class="text-center ">
+                            <i class='bi bi-person'><%= user.username %></i>
+                            <button id="settingsBtn" class="btn icon"><i class="bi bi-gear"></i></button>
+                        </h2>
+                        <form action="/delete" method="POST">
+                            <button id="deleteUser" hidden type="submit" class="btn mb-4 icon"
+                                onclick="return confirm('Are You sure You want to delete this user?');">
+                                <i class="bi bi-trash icon">Delete user</i>
+                            </button>
+                        </form>
+                        <div class="d-flex align-items-center justify-content-between">
+                            <button class="btn dashboardBtn-outline" data-bs-toggle="modal" data-bs-target="#mdpModal">
+                                <i class='bi bi-list-ol'></i> All diets
+                            </button>
+                            <button data-bs-toggle="modal" data-bs-target="#newDietModal" type="submit"
+                                class="btn dashboardBtn ms-1">
+                                <i class='bi bi-cart-plus'></i> New diet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="addM">
+                    <button class="btn dashboardBtn mt-2 mt-md-0" data-bs-toggle="modal"
+                        data-bs-target="#newMeasureModal">
+                        <i class="bi bi-plus-circle"></i>
+                        Add measure</button>
+                </div>
+                <div class="text-center act">
+                    <form action="/blog">
+                        <button id="deleteUser" type="submit" class="btn  mt-2 mt-md-0  icon dashboardBtn-outline">
+                            <i id="deleteMeasureIcon" class='bi bi-book'></i>
+                            Blog
+                        </button>
+                    </form>
+                    <form class="mt-2 mb-3" action="/logout">
+                        <button type="submit" class="btn dashboardBtn-outline">
+                            <i class='bi bi-box-arrow-left'></i> Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9 order-3 order-md-2 text-center">
+                <div class="mt-4" role="group">
+                    <input type="radio" class="btn-check" name="btnradio" id="wChartBtn" autocomplete="off" checked>
+                    <label class="btn chartBtn" for="wChartBtn">Body weight chart</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="fChartBtn" autocomplete="off">
+                    <label class="btn chartBtnDisabled" for="fChartBtn">Body fat chart</label>
+
+                    <input type="radio" class="btn-check" name="btnradio" id="galleryBtn" autocomplete="off">
+                    <label class="btn chartBtnDisabled" for="galleryBtn">Measurements</label>
+                </div>
+                <div id="wChart" class="mt-md-4 mt-2 text-center">
+                    <canvas id="weightChart"></canvas>
+                    <button class="btn mt-2 btn-sm downloadBtn" onclick="nonce-download()"><i
+                            class='bi bi-download'></i>
+                        Download</button>
+                </div>
+                <div id="fChart" class="hide mt-md-4 mt-2 text-center">
+                    <canvas id="fatChart"></canvas>
+                    <button class="btn mt-2 btn-sm downloadBtn" onclick="downloadTwo()"><i class='bi bi-download'></i>
+                        Download</button>
+                </div>
+                <div id="gallery" class="hide mt-3 d-flex justify-content-around">
+                    <% if(!user.measures.length){ %>
+                    <h1 class="text-center mt-5 pt-5 noGallery">Add your first body measurement!</h1>
+                    <% } %>
+                    <!-- <button id="prevBtn" class="btn icon"><i class="bi bi-chevron-left"></i> Prev</button> -->
+                    <div class="mt-1 row row-cols-1 row-cols-lg-3 row-cols-md-2 g-3">
+                        <% for (let i=0; i < user.measures.length; i++) { %>
+                        <div class="col d-flex flex-column align-items-center">
+                            <div class="card cardMeasures" id="<%= i %>">
+                                <div class="card-header card-text">
+                                    <i class='bi bi-calendar'></i>
+                                    <%= user.measures[i].createdAt.toDateString().slice(4,15)%>
+                                    <button type="submit" class="btn ps-0 icon card-text ms-4" data-bs-toggle="modal"
+                                        data-bs-target="#editMeasureModal<%= i %>">
+                                        <i id="editMeasureIcon" class='bi ms-auto bi-pencil'></i>
+                                    </button>
+                                    <form class="d-inline"
+                                        action="/plan/<%= user._id %>/<%= user.measures[i]._id %>?_method=DELETE"
+                                        method="POST">
+                                        <button type="submit"
+                                            onclick="return confirm('Are You sure You want to delete this measure?');"
+                                            class="btn card-text icon">
+                                            <i id="deleteMeasureIcon" class='bi bi-trash'></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <% if(user.measures[i].images.length> 1){ %>
+                                <div id="carouselExampleIndicators<%= i %>" class="carousel slide"
+                                    data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#carouselExampleIndicators<%= i %>"
+                                            data-bs-slide-to="0" class="active" aria-current="true"
+                                            aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators<%= i %>"
+                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators<%= i %>"
+                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    </div>
+                                    <div class="carousel-inner">
+                                        <% for (let n=0; n < user.measures[i].images.length; n++) {%>
+                                        <div class="carousel-item <% if(n === 0){ %>active<% } %>">
+                                            <img src="<%= user.measures[i].images[n].url.slice(0,50)%>q_auto:best/c_fill,g_face:center,h_300,w_260/<%= user.measures[i].images[n].url.slice(50) %>"
+                                                class="d-block card-img-top w-100" alt="...">
+                                        </div>
+                                        <% }%>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExampleIndicators<%= i %>" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExampleIndicators<%= i %>" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                                <% } else if (user.measures[i].images.length===1){ %>
+                                <div class="">
+                                    <img src="<%= user.measures[i].images[0].url.slice(0,50)%>q_auto:best/c_fill,g_face:center,h_300,w_260/<%= user.measures[i].images[0].url.slice(50) %>"
+                                        class="d-block card-img-top w-100" alt="...">
+                                </div>
+                                <% }else if(user.gender==='male' ){ %>
+                                <div class="">
+                                    <img src="/images/male.png" class="d-block card-img-top w-100" alt="...">
+                                </div>
+                                <% } else{%>
+                                <div class="">
+                                    <img src="/images/female.png" class="d-block card-img-top w-100" alt="...">
+                                </div>
+                                <% } %>
+                                <div class="card-body pb-2 pt-4 mb-2 mt-0">
+                                    <p class="card-text">
+                                        <span id="fatPrc"></span>
+                                        <br>
+                                        Weight:
+                                        <%= user.measures[i].weight %>
+                                        <% if(user.unit==='metric' ){ %>
+                                        kg
+                                        <% }else{ %>
+                                        pounds
+                                        <% } %>
+                                        <br>
+                                        Neck:
+                                        <%= user.measures[i].neck %>
+                                        <% if(user.unit==='metric' ){ %>
+                                        cm
+                                        <% }else{ %>
+                                        inch
+                                        <% } %>
+                                        <br>
+                                        Waist:
+                                        <%= user.measures[i].waist %>
+                                        <% if(user.unit==='metric' ){ %>
+                                        cm
+                                        <% }else{ %>
+                                        inch
+                                        <% } %>
+                                        <br>
+                                        <% if(user.gender!=='male' ){ %>Hip:
+                                        <%=user.measures[i].hip%>
+                                        <% if(user.unit==='metric' ){ %>
+                                        cm
+                                        <% }else{%>
+                                        inch
+                                        <% }} %>
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="dietStatus" id="<%= user.measures[i].dietStatus %>">
+                                        <% if(user.measures[i].dietStatus==="Using" ){ %>
+                                        <i class='bi bi-emoji-smile-fill'> <%= user.measures[i].dietStatus %>
+                                            diet</i>
+                                        <% } %>
+                                        <% if( user.measures[i].dietStatus==="Not using" ){  %>
+                                        <i class='bi bi-emoji-frown-fill'> <%= user.measures[i].dietStatus %>
+                                            diet</i>
+                                        <% } %>
+                                        <% if(user.measures[i].dietStatus==="Partialy using" ){ %>
+                                        <i class='bi bi-emoji-neutral-fill'> <%= user.measures[i].dietStatus %>
+                                            diet</i>
+                                        <% } %>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                    <!-- <button id="nextBtn" class="btn icon">Next <i class="bi bi-chevron-right"></i></button> -->
+                </div>
+                <div id="fatCat" class="hide mt-5">
+                    <img class="fatCatImg" src="/images/fatCategorization1.png" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('./measuresModals') %>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+        integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/1.2.1/chartjs-plugin-zoom.min.js"
+        integrity="sha512-klQv6lz2YR+MecyFYMFRuU2eAl8IPRo6zHnsc9n142TJuJHS8CG0ix4Oq9na9ceeg1u5EkBfZsFcV3U7J51iew=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const user = <%- JSON.stringify(user) %>
+    </script>
+
+    <script src="/js/weightChart.js"></script>
+    <script src="/js/fatChart.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="/js/validateForm.js"></script>
+    <script src="/js/profile.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+</body>
+
+</html>

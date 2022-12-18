@@ -1,0 +1,210 @@
+<!-- Log In Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Log In</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ps-5 pe-5 pb-4">
+                <form class="validated-form"  action="/login" method="POST" novalidate>
+                    <div>
+                        <label class="form-label  mb-0" for="usernameLog">Username:</label>
+                        <input class="form-control" type="text" id="usernameLog" name="username" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter username.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="passwordLog">Password:</label>
+                        <input class="form-control" type="password" id="passwordLog" name="password" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter password.
+                        </div>
+                    </div>
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-md-4 text-center">
+                            <button type="submit" class="btn btn-lg modalBtn1  mb-1">Login</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-3 justify-content-center">
+                    <div class="col-md-10 text-center">
+                        <a class="forpsw card-text1" href="/forgotPassword">Forgot Your password?</a>
+                    </div>
+                </div>
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-md-10 text-center">
+                        <a class="btn modalBtn btn-lg mt-3 mb-1" href="/auth/google" role="button"
+                            style="text-transform:none">
+                            Continue with
+                            <img class="googleBtn" alt="Google sign-in"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />oogle
+                        </a>
+                    </div>
+                </div>
+                <div class="row mt-1 justify-content-center">
+                    <div class="col-md-10 text-center mt-3">
+                        <small>Don't have an account?</small>
+                        <a class="mb-1 card-text1" role="button" data-bs-toggle="modal"
+                        data-bs-target="#registerModal">Register here!</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content modalForm">
+            <div class="modal-header">
+                <h5 class="modal-title" id="registerModalLabel">Register</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body mb-2 ps-5 pe-5 pb-4">
+                <div class="row text-center mb-4 justify-content-center">
+                    <div class="col-md-10">
+                        <a class="btn modalBtn btn-lg mt-3 mb-1" href="/auth/google" role="button"
+                            style="text-transform:none">
+                            Continue with
+                            <img class="googleBtn" alt="Google sign-in"
+                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />oogle
+                        </a>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h5>OR</h5>
+                </div>
+                <form class="validated-form" id="registerForm" action="/register" method="POST" novalidate>
+                    <div class="row justify-content-center">
+                        <div class="col-sm-6">
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="email">E-mail:</label>
+                                <input class="form-control " type="email" name="email" id="email" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter email.
+                                </div>
+                            </div>
+                            <div id="usernameRegDiv">
+                                <label class="form-label mt-2 mb-0" for="usernameReg">Username:</label>
+                                <input class="form-control" aria-describedby="validationUsername" type="text" id="usernameReg" name="username" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div id="validationUsername" class="invalid-feedback">
+                                    Username must be between 6 and 20 characters. It can contain only letters(lovercase and/or uppercase) and numbers.
+                                  </div>
+                            </div>
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="passwordReg">Password:</label>
+                                <input class="form-control" aria-describedby="validationPswd" type="password" name="password" id="passwordReg" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div id="validationPswd" class="invalid-feedback">
+                                    Password must be between 6 and 20 characters.
+                                  </div>
+                            </div>
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="passwordRpt">Repeat password:</label>
+                                <input class="form-control" aria-describedby="validationRptPswd" type="password" id="passwordRpt" name="repeatPassword"
+                                    required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div id="validationRptPswd" class="invalid-feedback">
+                                        Password does not match.
+                                      </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="dob">Date of birth:</label>
+                                <input class="form-control" type="date" name="dob" id="dob" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter Your date of birth.
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="gender">Gender:</label>
+                                <select class="form-select form-control" name="gender" id="gender" required>
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter Your gender.
+                                </div>
+                            </div>
+                            <div>
+                                <label class="form-label mt-2 mb-0" for="unit">Unit:</label>
+                                <select class="form-select" name="unit" id="unit" required>
+                                    <option value="">--Please choose an option--</option>
+                                    <option value="metric">Metric</option>
+                                    <option value="imperial">Imperial</option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please choose system of units.
+                                </div>
+                            </div>
+                            <div>
+                                <div id="heightMe" class="hide">
+                                    <label class="form-label mt-2 mb-0" for="height">Height (cm):</label>
+                                    <input class="form-control" type="number" name="height" id="height" required>
+                                </div>
+                                <div id="heightIm" class="hide mb-0 mt-2">
+                                    <label class="form-label d-block mt-2 mb-0" for="height1">Height
+                                        (foot,inch):</label>
+                                    <input class="form-control  imperial d-inline" min="1" max="9" type="number"
+                                        placeholder="foot" id="height1" required>
+                                    <input class="form-control  imperial d-inline" min="1" max="11" step=".01"
+                                        type="number" placeholder="inch" id="height2" required>
+                                </div>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Please enter Your height.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 text-center mt-4">
+                            <label class="form-label d-block" for="check">Are you sure all inputed data is
+                                correct?</label>
+                            Yes, I'm! <input class="form-checkbox d-inline" id="check" type="checkbox" required>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <button class="btn btn-lg modalBtn1" id="registerBtn" type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/validateForm.js"></script>
+<script src="/js/units.js"></script>

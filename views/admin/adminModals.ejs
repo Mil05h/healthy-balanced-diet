@@ -1,0 +1,88 @@
+
+    <!-- New Blog Post Modal -->
+    <div class="modal fade" id="newBlogPostModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Add New Blog Post</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/admin9196/blogPost" method="POST">
+                        <div>
+                            <label class="form-label" for="title">Title:</label>
+                            <input class="form-control" type="text" name="title" id="title">
+                        </div>
+                        <div>
+                            <label class="form-label" for="body">Body Text:</label>
+                            <textarea class="form-control" name="body" id="body" cols="30" rows="10"></textarea>
+                        </div>
+                        <div>
+                            <label class="form-label" for="imgUrl">Image Url:</label>
+                            <input class="form-control" type="text" name="imgUrl" id="imgUrl">
+                        </div>
+                        <div>
+                            <label class="form-label" for="category">Category:</label>
+                            <div>
+                                <label for="chooseC">Choose</label>
+                                <input type="radio"  name="c" id="chooseC" autocomplete="off"
+                                    checked>
+                                <select id="chooseCategory" name="category">
+                                    <option value="/">--- Chose category ---</option>
+                                    <% for(let i=0; i<categories.length; i++){ %>
+                                        <option value="<%= categories[i] %>">
+                                            <%= categories[i] %>
+                                        </option>
+                                        <% } %>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="newC">New</label>
+                                <input type="radio"  name="c" id="newC" autocomplete="off">
+                                <input class="hide" name="" type="text" placeholder="Create New Category" id="newCategory">
+                            </div>
+                        </div>
+                        <button class="btn btn-sm btn-success" type="submit">POST</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Blog Post Modal -->
+    <% for (let i = 0; i<blogs.length; i++) { %>
+        <div class="modal fade" id="editMeasureModal<%= i %>" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Edit Blog Post</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/admin9196/blogPost/<%= blogs[i]._id %>?_method=PUT" method="POST">
+                            <div>
+                                <label class="form-label" for="title">Title:</label>
+                                <input class="form-control" type="text" value="<%= blogs[i].title %>" name="title" id="title">
+                            </div>
+                            <div>
+                                <label class="form-label" class="form-label" for="body">Body Text:</label>
+                                <textarea class="form-control" class="form-control" name="body" id="body" cols="30" rows="10"><%= blogs[i].body %></textarea>
+                            </div>
+                            <div>
+                                <label class="form-label" for="imgUrl">Image Url:</label>
+                                <input class="form-control" type="text" name="imgUrl" value="<%= blogs[i].imgUrl %>" id="imgUrl">
+                            </div>
+                            <div>
+                                <label class="form-label" for="category">Category:</label>
+                                <input class="form-control" type="text" name="category" value="<%= blogs[i].category %>" id="category">
+                            </div>
+                            <button class="btn btn-sm btn-success mt-3" type="submit">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+        

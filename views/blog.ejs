@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id" content="<%- process.env.GOOGLE_CLIENT_ID %>.apps.googleusercontent.com">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,500;0,900;1,700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap" rel="stylesheet">
+    <title>Healthy Balanced Diet</title>
+</head>
+
+<body class="d-flex flex-column">
+    <%- include('./partials/header') %>
+    <div class="cInnerContent">
+        <div class="container mt-4 features">
+            <div class="row justify-content-center text-center">
+                <h1 class="text-center blogH1 gs_reveal ipsType_start">Blog</h1>
+                <div class="col-8 blogCategDiv text-center gs_reveal ipsType_start">
+                    <label class="form-label blogLabel" for="sort">Category:</label>
+                    <select class="form-select form-select mx-auto shadow blogControl" name="sort" id="sort">
+                        <option value="all">All</option>
+                        <% for(let i=0; i<categories.length; i++){ %>
+                        <option value="<%= categories[i] %>">
+                            <%= categories[i] %>
+                        </option>
+                        <% } %>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row feature ipsSpacer_bottom_double ipsGrid ipsGrid_collapsePhone">
+                <div class="col-12">
+                    <div class="mt-5 row row-cols-1 row-cols-lg-3 row-cols-md-2 row-cols-xl-4 g-4">
+                        <% for(let i=0; i < blogs.length; i++){ %>
+                        <div class="col cardCol pt-3 pb-3  gs_reveal gs_reveal_fromLeft">
+                            <div id="<%= blogs[i]._id %>" class="card text-center shadow blogCard">
+                                <div class="card-header">
+                                    <p class="card-text">
+                                        <%= blogs[i].category %>
+                                    </p>
+                                </div>
+                                <img src="<%= blogs[i].imgUrl %>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+
+                                        <%= blogs[i].title %>
+
+                                    </h5>
+                                    <p class="card-text">
+                                        <%= blogs[i].body.substring(0, 75) %>...
+                                    </p>
+                                    Read more <i class='bi bi-box-arrow-in-up-right'></i>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="readMore">
+                                        <%= blogs[i].createdAt.toDateString().slice(4,15) %>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer') %>
+    <%- include('./logModals') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+
+
+    <script>
+        const blogs = <%- JSON.stringify(blogs) %>
+                    const categories = <%- JSON.stringify(categories) %>
+                    const category = <%- JSON.stringify(category) %>
+    </script>
+
+    <script src="/js/validateRegister.js"></script>
+    <script src="/js/blog.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,612 @@
+<!-- New Measure Modal -->
+<div class="modal fade" id="newMeasureModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Add New Measures</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ps-5 pe-5 text-center mb-2">
+                <form class="validated-form" action="/plan/<%= user._id %>" method="POST" enctype="multipart/form-data"
+                    novalidate>
+                    <div>
+
+                        <label class="form-label mt-2 mb-0" for="weight">
+                            Weight
+                            <% if(user.unit==='metric' ){ %>
+                            (kg)
+                            <%}else{ %> (pounds)
+                            <% } %>:
+                        </label>
+                        <input class="form-control" step=".01" type="number" id="weight" name="measure[weight]"
+                            required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter weight measure.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="neck">
+                            Neck
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <%}else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input class="form-control" step=".01" type="number" id="neck" name="measure[neck]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter neck measure.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="waist">
+                            Waist
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <% }else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input class="form-control" step=".01" type="number" id="waist" name="measure[waist]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter waist measure.
+                        </div>
+                    </div>
+                    <% if(user.gender !=='male' ){ %>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="hip">
+                            Hip
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <% }else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input class="form-control" step=".01" type="number" id="hip" name="measure[hip]">
+                    </div>
+                    <% } else{ %>
+                    <input type="hidden" id="hip" value='0' name="measure[hip]">
+                    <% } %>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="image">Add image/s (optional):</label>
+                        <input aria-describedby="validateImage" class="form-control" type="file" name="image" id="image"
+                            accept=".png, .jpg, .jpeg" multiple>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div id="validateImage" class="invalid-feedback">
+                            Maximum number of images You can have is 3/measuring
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="dietStatus">Have you used our
+                            diet since the last measuring?</label>
+                        <select class="form-control" name="measure[dietStatus]" id="dietStatus" required>
+                            <option value="">--Please choose Your answer--</option>
+                            <option value="Not using">No I did not</i></option>
+                            <option value="Partialy using">Yes, but not completely</option>
+                            <option value="Using">Yes I did</option> emoji-smile-fill
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose Your answer.
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 text-center">
+                            <button type="submit" id="addMeasureBtn" class="btn btn-success mt-3 mb-1">Add</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Measure Modal -->
+<% for (let i=0; i < user.measures.length ; i++) { %>
+<div class="modal fade" id="editMeasureModal<%= i %>" tabindex="-1" aria-labelledby="loginModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Edit Measure</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ps-5 pe-5 mb-2">
+                <form class="validated-form" action="/plan/<%= user._id %>/<%= user.measures[i]._id %>?_method=PUT"
+                    method="POST" enctype="multipart/form-data" novalidate>
+                    <div>
+                        <label class="form-label mt-2 mb-0"
+                            for="weight<%= i %>">Weight<% if(user.unit==='metric' ){ %>(kg)
+                            <% }else{ %>(pounds)<% } %>:</label>
+                        <input class="form-control" step=".01" type="number" data-bs-whatever="@mdo"
+                            value="<%= user.measures[i].weight%>" id="weight<%= i %>" name="measure[weight]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter weight measure.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="neck<%= i %>">
+                            Neck
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <%}else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input class="form-control" step=".01" type="number" value="<%= user.measures[i].neck %>"
+                            id="neck<%= i %>" name="measure[neck]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter neck measure.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2  mb-0" for="waist<%= i %>">
+                            Waist
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <% }else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input class="form-control" type="number" step=".01" id="waist<%= i %>"
+                            value="<%= user.measures[i].waist%>" name="measure[waist]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter waist measure.
+                        </div>
+                    </div>
+                    <% if(user.gender !=='male' ){ %>
+                    <div>
+                        <label for="hip<%= i %>">
+                            <% if(user.unit==='metric' ){ %>
+                            (cm)
+                            <% }else{ %>
+                            (inch)
+                            <% } %>
+                            :
+                        </label>
+                        <input step=".01" type="number" id="hip<%= i %>" value="<%= user.measures[i]._id %>"
+                            name="measure[hip]">
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please enter hip measure.
+                        </div>
+                    </div>
+                    <% } else{ %>
+                    <input type="hidden" id="hip<%= i %>" value='0' name="measure[hip]">
+                    <% } %>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="editImg<%= i %>">Add image/s (optional):</label>
+                        <input aria-describedby="validateEditImg" class="form-control" type="file" name="image"
+                            id="editImg<%= i %>" accept=".png, .jpg, .jpeg" multiple>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div id="validateEditImg" class="invalid-feedback">
+                            Maximum number of images You can have is 3/measuring.
+                        </div>
+                    </div>
+                    <div>
+                        <label class="form-label mt-2 mb-0" for="dietStatus<%= i %>">Have you used our
+                            diet since the last measuring?</label>
+                        <select class="form-control editMsrDietSts" name="measure[dietStatus]" id="dietStatus<%= i %>"
+                            required>
+                            <option value="">--Please choose Your answer--</option>
+                            <option value="Not using">No I did not</option>
+                            <option value="Partialy using">Yes, but not completely</option>
+                            <option value="Using">Yes I did</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Please choose Your answer.
+                        </div>
+                    </div>
+                    <div class="uploaded">
+                        <% user.measures[i].images.forEach(function(img, im){ %>
+                        <div>
+                            <img src="<%= img.thumbnail %>" class="img-thumbnail" alt="">
+                            <div class="form-check-inline">
+                                <input type="checkbox" id="image-<%= im %><%= i %>" name="deleteImages[]"
+                                    value='<%=img.filename %>'>
+                            </div>
+                            <label for="image-<%= im %><%= i %>">Delete?</label>
+                        </div><br>
+                        <% }) %>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 text-center">
+                            <button type="submit" class="btn modalBtn editMeasureBtn btn-lg mt-2 mb-1">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+
+
+<!-- Instruction Modal -->
+<div class="modal fade" id="instructionModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Instructions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center p-2">
+                    <p>
+                        Insert measures every two weeks. <br> Take measurements of weight, neck, the
+                        narrowest
+                        part of the waist and ladies the widest part of the hips. <br>
+                        Optionaly you can add up to three pictures. For best comparasion take front, side
+                        and back pictures.
+                    </p>
+                    <img class="instructions" src="/images/instructions.png" alt="" srcset="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- My diet lans Modal -->
+<% for (let i=0; i < user.diets.length ; i++) { %>
+<div class="modal fade" id="mdpModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">My diet plans:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center p-2">
+                    <ul>
+                        <% if(user.diets[i].url==='ordered' ) {%>
+                        <li> <strong> Ordered: <%= user.diets[i].createdAt.toDateString().slice(4,15) %>
+                            </strong> <br>
+                            <small>--Expect within a week--</small>
+                        </li>
+                        <% }else{ %>
+                        <li><strong>Arriwed: <%=
+                                                            user.diets[i].updatedAt.toDateString().slice(4,15) %>
+                                <br>
+                                <a target="_blank" class="diet" href="<%= user.diets[i].url %>"></strong><i
+                                class='bi bi-file-earmark-pdf'>Diet</i>
+                            </a>
+                            <button class="btn btn-sm" onclick="downloadPdf('<%= user.diets[i].url %>')"> <i
+                                    class='bi share bi-download'> download</i></button>
+                        </li>
+                        <% } %> <br>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<% } %>
+
+<!-- New Diet Modal -->
+<div class="modal fade" id="newDietModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">New diet plan</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+
+
+                <!-- Replace "test" with your own sandbox Business account app client ID -->
+                <script
+                    src="https://www.paypal.com/sdk/js?client-id=<%- process.env.PAYPAL_ID %>&currency=USD&commit=true">
+                    </script>
+                <!-- Set up a container element for the button -->
+
+
+                <div class="container mt-3 mb-3">
+                    <div class="row justify-content-center">
+                        <div class="col-10">
+                            <div class="row">
+                                <p class="mt-2">Please provide us with detais about your lifestyle, goals etc.
+                                </p>
+                                 <div class="col-4">
+                                    Date of birth: <br>
+                                    <i class='bi bi-calendar'> <%= user.dob.toDateString().slice(4,15)%></i>
+                                </div>
+                                <div class="col-4">
+                                    <% if(user.unit==='metric' ){ %> Height: <br>
+                                    <i class='bi bi-rulers'> <%= user.height %> cm</i>
+                                    <% }else{ %> Height: <br>
+                                    <i class='bi bi-rulers'> <%= user.height.toString().slice(0,1) %> foot
+                                        <%= user.height.toString().slice(1) %> inch</i>
+                                    <% } %>
+                                </div>
+                                <div class="col-4">
+                                    <% if(user.gender==='male' ){%> Gender: <br>
+                                    <i class='bi bi-gender-male'> male</i>
+                                    <% }else{ %> Gender: <br>
+                                    <i class='bi bi-gender-female'> female</i>
+                                    <% } %>
+                                </div>
+                               <div class="col-lg-12 mt-3">
+                                    <label class="form-label" for="orderDetails">Order details:</label>
+                                    <textarea class="form-control" aria-describedby="validateOrderDetails"
+                                        name="orderDetails" id="orderDetails" cols="20" rows="5"></textarea>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div id="validateOrderDetails" class="invalid-feedback">
+                                        Please provide Us with details (50-500 words) about Your
+                                        lifestyle so we can program diet to suit best for Your needs.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label" for="foodAllergies">
+                                        Food Alergies:
+                                    </label>
+                                    <input type="text" class="form-control" aria-describedby="validateFoodAllergies"
+                                        id="foodAllergies" name="foodAllergies">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div id="validateFoodAllergies" class="invalid-feedback">
+                                        Please type food alergies if You have any, or smiply type 'NO'.
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label mt-2 mb-0" for="excerciseLevel">
+                                        Excercise Level:</label>
+                                    <select aria-describedby="validateEL" class="form-select" name="excerciseLevel"
+                                        id="excerciseLevel" required>
+                                        <option value="/">---Please choose an option:---</option>
+                                        <option value="0">
+                                            Sedentary (Little or no exercise)
+                                        </option>
+                                        <option value="1">
+                                            Exercise 1-3 times/week (15-45min. of elevated hart rate
+                                            activity)
+                                        </option>
+                                        <option value="2">
+                                            Exercise 4-5 times/week (15-45min. of elevated hart rate
+                                            activity)
+                                        </option>
+                                        <option value="3">
+                                            Daily exercise (15-45min. of elevated hart rate activity)
+                                        </option>
+                                        <option value="3">
+                                            Intense exercise 3-5 times/week (45-120min. of elevated hart
+                                            rate activity)
+                                        </option>
+                                        <option value="4">
+                                            Intense exercise 6 to 7 times/week (45-120min. of elevated heart
+                                            rate activity)
+                                        </option>
+                                        <option value="5">Intense exercise daily (2+ hours of elevated heart
+                                            rate activity)
+                                        </option>
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div id="validateEL" class="invalid-feedback">
+                                        Please select Your excercise level.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <label class="form-label d-block " for="check">Are You sure all inputed
+                                    data is
+                                    correct?</label>
+                                Yes, I'm! <input aria-describedby="validateCheck" class="form-checkbox d-inline"
+                                    id="check" type="checkbox" required>
+                                <div id="validateCheck" class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                            <div class="text-center mt-3 mb-3">
+                                <h3>Total amount: $50.00</h3>
+                            </div>
+                            <div id="paypal-button-container"></div>
+
+                            <script>
+                                paypal
+                                    .Buttons({
+                                        // onInit is called when the button first renders
+                                        onInit: function (data, actions) {
+
+                                            // Disable the buttons
+                                            actions.disable();
+
+
+                                            // Listen for changes to the checkbox
+                                            const check = document.getElementById('check');
+                                            const orderDetails = document.getElementById('orderDetails');
+                                            const foodAllergies = document.getElementById('foodAllergies');
+                                            const excerciseLevel = document.getElementById('excerciseLevel');
+
+                                            check.addEventListener('change', function (event) {
+
+                                                // Enable or disable the button when it is checked or unchecked
+                                                if (event.target.checked && orderDetails.value.length > 0
+                                                    && foodAllergies.value.length > 0
+                                                    && excerciseLevel.value !== '/') {
+                                                    actions.enable();
+                                                } else {
+                                                    actions.disable();
+                                                }
+                                            });
+                                        },
+
+                                        // onClick is called when the button is clicked
+                                        onClick: function (data) {
+
+                                            // Show a validation error if the checkbox is not checked
+                                            if (orderDetails.value.length < 50 || orderDetails.value.length > 500) {
+                                                orderDetails.classList.add('is-invalid');
+                                                if (foodAllergies.value.length < 1) {
+                                                    foodAllergies.classList.add('is-invalid')
+                                                    if (excerciseLevel.value === '/') {
+                                                        excerciseLevel.classList.add('is-invalid')
+                                                        if (!check.checked) {
+                                                            check.classList.add('is-invalid')
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else if (foodAllergies.value.length === 0) {
+                                                foodAllergies.classList.add('is-invalid')
+                                                if (excerciseLevel.value === '/') {
+                                                    excerciseLevel.classList.add('is-invalid')
+                                                    if (!check.checked) {
+                                                        check.classList.add('is-invalid')
+                                                    }
+                                                }
+                                            }
+                                            else if (excerciseLevel.value === '/') {
+                                                excerciseLevel.classList.add('is-invalid')
+                                                if (!check.checked) {
+                                                    check.classList.add('is-invalid')
+                                                }
+                                            }
+                                            else if (!check.checked) {
+                                                check.classList.add('is-invalid')
+                                            }
+                                        },
+
+
+                                        // Sets up the transaction when a payment button is clicked
+                                        createOrder: function (data, actions) {
+                                            return fetch("/api/orders/<%= user._id %>", {
+                                                method: "post",
+                                                // use the "body" param to optionally pass additional order information
+                                                // like product ids or amount
+                                            })
+                                                .then((response) => response.json())
+                                                .then((order) => order.id);
+                                        },
+                                        // Finalize the transaction after payer approval
+                                        onApprove: function (data, actions) {
+                                            return fetch(`/api/orders/${data.orderID}/capture/<%=user._id%>?details=${orderDetails.value}&foodAllergies=${foodAllergies.value}&excerciseLevel=${excerciseLevel.value}`, {
+                                                method: "post",
+                                            })
+                                                .then((response) => response.json())
+                                                .then((captureData) => {
+                                                    // if (captureData.error === 'INSTRUMENT_DECLINED'); // Your server response structure and key names are what you choose
+                                                    // return actions.restart();
+                                                    // const transaction = orderData.purchase_units[0].payments.captures[0];
+                                                    // alert(
+                                                    //     "Transaction " +
+                                                    //     transaction.status +
+                                                    //     ": " +
+                                                    //     transaction.id +
+                                                    //     "\n\nSee console for all available details"
+                                                    // );
+
+                                                    location.href = '/api/orders/paypalSuccess/<%= user._id %>'
+                                                    // When ready to go live, remove the alert and show a success message within this page. For example:
+                                                    // var element = document.getElementById('paypal-button-container');
+                                                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                                                    // Or go to another URL:  actions.redirect('thank_you.html');
+                                                })
+                                        },
+                                        onCancel: function (data) {
+                                            // Show a cancel page, or return to cart
+                                            location.href = '/plan/<%= user._id %>'
+                                        },
+                                        onError: function (err) {
+                                            // For example, redirect to a specific error page
+                                            location.href = "/api/orders/paypalError/<%= user._id %>";
+                                        }
+                                    }).render('#paypal-button-container')
+
+
+                                // // Loop over each funding source/payment method
+                                // paypal.getFundingSources().forEach(function (fundingSource) {
+                                //     // Initialize the buttons
+                                //     const button = paypal.Buttons({
+                                //         fundingSource: fundingSource,
+                                //     })
+                                //     // Check if the button is eligible
+                                //     if (button.isEligible()) {
+                                //         // Render the standalone button for that funding source
+                                //         button.render('#paypal-button-container')
+                                //     }
+                                // })
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Change password modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body ps-5 pe-5 mb-2 text-center">
+                <form action="/changePassword/<%= user._id %>?_method=PATCH" method="POST">
+                    <div>
+                        <label class="form-label" for="oldPswd">Old Password:</label>
+                        <input class="form-control" type="password" name="oldPassword" id="oldPswd">
+                    </div>
+                    <div>
+                        <label class="form-label" for="newPswd">New Password:</label>
+                        <input class="form-control" type="password" name="newPassword" id="newPswd">
+                    </div>
+                    <div>
+                        <label class="form-label" for="repeatNewPswd">Repeat New Password:</label>
+                        <input class="form-control" type="password" name="repeatPassword" id="repeatNewPswd">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-lg btn-success shadow mt-2 mb-1" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="/js/orderAndMeasure.js"></script>

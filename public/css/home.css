@@ -1,0 +1,410 @@
+.hide {
+    display: none;
+}
+
+.zeroSection {
+    height: 100vh;
+    /* background-image: url("/images/healthy-balanced-diet-plan.png"); */
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 700px;
+    background-position: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.9);
+    color: white;
+}
+
+.secondSection {
+    background-color: #6BAA75;
+}
+
+.fourthSection {
+    background-color: darkslategray;
+}
+
+h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 4.5rem;
+    font-weight: 600;
+    color: darkslategray;
+}
+
+h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 600;
+    color: #2f4f4f;
+}
+
+
+
+h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 6rem;
+    font-weight: 600;
+    border-radius: 1rem;
+    color: #2f4f4f;
+}
+
+.underh1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem;
+    color: #2f4f4f;
+    line-height: 40px;
+}
+
+.divTwo {
+    font-family: 'Nunito', sans-serif;
+    border-radius: 1.5rem;
+    font-size: 1.8rem;
+    line-height: 60px;
+    background-color: rgb(228, 228, 228);
+    /* font-weight: 600; */
+}
+
+.divOne {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem !important;
+    line-height: 60px;
+    border-radius: 1.5rem;
+    background-color: #2f4f4f;
+    color: white;
+    width: 750px;
+    position: absolute;
+    z-index: 0;
+    /* font-weight: 600; */
+}
+
+.smallestFont {
+    font-size: 1.25rem;
+}
+
+ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.img {
+    height: 550px;
+    position: relative;
+    z-index: 10;
+    margin-left: 450px;
+}
+
+.logBtn {
+    /* font-weight: 600; */
+    border-radius: 1rem;
+    font-family: 'Nunito', sans-serif;
+    width: 49%;
+    background-color: white;
+    font-size: 1.5rem;
+}
+
+.regBtn {
+    /* font-weight: 600; */
+    border-radius: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    background-color: #021722;
+    color: white !important;
+}
+
+.modalBtn {
+    border-radius: 0.5rem;
+    border: 1px solid #021722;
+    font-family: 'Nunito', sans-serif;
+}
+
+.modalBtn1 {
+    color: white;
+    border-radius: 0.5rem;
+    font-family: 'Nunito', sans-serif;
+    background-color: #021722;
+}
+
+.modalBtn:hover {
+    transform: translateY(-0.2em);
+    transition: 0.2s;
+}
+
+.modalBtn1:hover {
+    transform: translateY(-0.2em);
+    transition: 0.2s;
+    color: white;
+}
+
+.logBtn:hover {
+    transform: translateY(-0.2em);
+    transition: 0.2s;
+}
+
+.regBtn:hover {
+    transform: translateY(-0.2em);
+    color: white !important;
+    transition: 0.2s;
+}
+
+.pricing1 {
+    font-family: 'Nunito', sans-serif;
+    border-radius: 1rem;
+}
+
+.faqs {
+    height: 5.5rem;
+    align-items: center;
+    border-radius: 1.5rem !important;
+    font-size: 2rem;
+    /* font-weight: 600; */
+    font-family: 'Nunito', sans-serif;
+}
+
+.faqs:hover {
+    transform: translateY(-0.2em);
+    transition: 0.2s;
+}
+
+.accordion-item {
+    background-color: #6BAA75;
+}
+
+.accordion-body {
+    font-size: 1.25rem;
+    color: white;
+    font-family: 'Nunito', sans-serif;
+}
+
+.col {
+    border-radius: 1rem;
+}
+
+.blogCard {
+    height: fit-content;
+    border-radius: 1rem !important;
+    font-family: 'Nunito', sans-serif;
+}
+
+.blogCard:hover {
+    cursor: pointer;
+    transform: translateY(-0.3em);
+    transition: 0.2s;
+}
+
+.card-header {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.card-footer {
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+}
+
+.card-text1 {
+    color: black
+}
+
+
+.forpsw {
+    font-family: 'Nunito', sans-serif;
+}
+
+.modal-content {
+    border-radius: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.form-control {
+    border-radius: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.form-select {
+    border-radius: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.blogLabel {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+}
+
+.blogControl {
+    font-family: 'Nunito', sans-serif;
+    border-radius: 1rem;
+    width: 40%;
+}
+
+.blogPostImg {
+    width: 400px;
+    border-radius: 2rem;
+}
+
+.category {
+    font-family: 'Nunito', sans-serif;
+}
+
+.googleBtn {
+    width: 30px;
+}
+
+
+.error {
+    background-color: #ff6666;
+    color: white !important;
+    border-radius: 1rem;
+    font-size: 1.5rem;
+}
+
+.imperial {
+    width: 100px;
+}
+
+.card-img-top {
+    height: auto;
+}
+
+
+@media(max-width: 990px) {
+    .zeroSection {
+        height: 500px;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .underh1 {
+        font-size: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .divOne {
+        position: static;
+        width: auto;
+        display: block;
+        align-self: center;
+        margin: auto;
+    }
+
+    .img {
+        height: 20rem;
+        margin: auto;
+        position: static;
+        display: block;
+        align-self: center;
+    }
+
+    .img2 {
+        height: 20rem;
+    }
+}
+
+@media(max-width: 770px) {
+    h1 {
+        font-size: 4rem;
+    }
+
+    .underh1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+    }
+}
+
+
+
+@media(max-width: 575px) {
+    .zeroSection {
+        height: 300px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        padding-top: 5px;
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .underh1 {
+        font-size: 1.2rem;
+    }
+
+    .divOne {
+        line-height: 30px;
+    }
+
+    .divTwo {
+        line-height: 30px;
+    }
+
+    .blogLabel {
+        font-size: 1.2rem;
+    }
+
+    .blogControl {
+        font-size: 1rem;
+    }
+
+    .img {
+        height: 15rem;
+    }
+
+    .img2 {
+        height: 15rem;
+    }
+
+    .divOne {
+        font-size: 1.2rem;
+    }
+
+    .divTwo {
+        font-size: 1.2rem;
+    }
+
+    .smallestFont {
+        font-size: 1rem;
+    }
+
+    ul {
+        font-size: 1.15rem;
+    }
+
+    .logBtn {
+        font-size: 1.2rem;
+    }
+
+    .regBtn {
+        font-size: 1.2rem;
+    }
+
+    .faqs {
+        font-size: 1.2rem;
+    }
+
+    .blogPostImg {
+        width: 300px;
+    }
+
+    .modalBtn {
+        font-size: 1rem;
+    }
+
+    .modalBtn1 {
+        font-size: 1rem;
+    }
+}

@@ -1,0 +1,297 @@
+.hide {
+  display: none !important;
+}
+
+.container {
+  margin-left: 0%;
+  margin-right: 0%;
+}
+
+
+.user {
+  border-radius: 1.5rem;
+}
+
+.charts {
+  border-radius: 1.5rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Nunito', sans-serif;
+  /* color: white; */
+}
+
+.firstCol {
+  background-color: #cee4d2;
+}
+
+
+.btn-group {
+  width: 50%;
+}
+
+
+.settings {
+  border-radius: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+
+.settings:hover {
+  transform: translateY(-0.2em);
+  transition: 0.2s;
+}
+
+.share {
+  font-family: 'Nunito', sans-serif;
+}
+
+p {
+  font-family: 'Nunito', sans-serif;
+}
+
+.dietPdf {
+  font-family: 'Nunito', sans-serif;
+  font-size: 2rem;
+}
+
+.dietDate {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+}
+
+
+.btn-sm:hover {
+  transform: translateY(-0.2em);
+  transition: 0.2s;
+}
+
+.fatCatImg {
+  width: 65%;
+}
+
+
+.cardMeasures {
+  height: fit-content;
+  width: 260px;
+  border-radius: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.card-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1rem;
+}
+
+.card-img-top {
+  height: 300px;
+}
+
+.offcanvas-title {
+  font-family: 'Nunito', sans-serif;
+}
+
+.offcanvas-body {
+  font-size: 1.2rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.diet {
+  font-size: 1.5rem;
+}
+
+.icon{
+  color: #021722;
+  font-family: 'Nunito', sans-serif;
+}
+
+.icon:hover {
+  transform: translateY(-0.1em);
+  transition: 0.2s;
+}
+
+.dietStatus {
+  color: green;
+}
+
+.modal-content {
+  border-radius: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.form-control {
+  border-radius: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.form-select {
+  border-radius: 1rem;
+  font-family: 'Nunito', sans-serif;
+}
+
+.modalBtn {
+  border-radius: 0.5rem;
+  background-color: #006d00;
+  font-family: 'Nunito', sans-serif;
+  color: white;
+}
+
+.modalBtn:hover {
+  transform: translateY(-0.2em);
+  transition: 0.2s;
+}
+
+.opct {
+  opacity: .2;
+}
+
+.instructions {
+  width: 100%;
+}
+
+.imperial {
+  width: 100px;
+}
+
+.noGallery {
+  color: gray;
+  font-family: 'Nunito', sans-serif;
+}
+
+
+.dashboardBtn {
+  border-radius: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  background-color: #021722;
+  color: white;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.chartBtn {
+  font-family: 'Nunito', sans-serif;
+  color: #021722;
+  font-size: 1.5rem;
+}
+
+.chartBtnDisabled {
+  font-family: 'Nunito', sans-serif;
+  color: lightgray;
+  font-size: 1.5rem;
+}
+
+.dashboardBtn-outline {
+  border-radius: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  border: 1px solid #021722;
+  color: #021722;
+  font-size: 1.2rem;
+  width: 100%;
+}
+
+.downloadBtn{
+  /* font-weight: 600; */
+  border-radius: 0.5rem;
+  font-family: 'Nunito', sans-serif;
+  border: 1px solid #021722;
+  color: #021722;
+  font-size: 1rem;
+}
+
+.dashboardBtn:hover {
+  transform: translateY(-0.2em);
+  color: white;
+  transition: 0.2s;
+}
+
+.dashboardBtn-outline:hover {
+  transform: translateY(-0.2em);
+  transition: 0.2s;
+}
+
+
+@media (max-width: 1200px) {
+  .newDbtn {
+    font-size: 1.2rem;
+  }
+
+  .mdpBtn {
+    font-size: 1.2rem;
+  }
+
+  .newMbtn {
+    font-size: 1.1rem;
+  }
+
+  .dsb {
+    background-color: #e9fbf3;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    border-bottom-left-radius: 0rem;
+  }
+
+  .iBtn {
+    font-size: 1rem;
+  }
+
+  .btn-outline-dark {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 990px) {
+  h2 {
+    font-size: 1.5rem;
+  }
+
+
+  .newDbtn {
+    font-size: 0.8rem;
+  }
+
+  .mdpBtn {
+    font-size: 0.8rem;
+  }
+
+  .newMbtn {
+    font-size: 0.7rem;
+  }
+
+  .btn-outline-dark {
+    font-size: 0.7rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+
+  .newDbtn {
+    font-size: 1.5rem;
+  }
+
+  .mdpBtn {
+    font-size: 1.5rem;
+  }
+
+  .newMbtn {
+    font-size: 1.5rem;
+  }
+
+  .btn-outline-dark {
+    font-size: 1rem !important;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .btn-outline-dark {
+    font-size: 1rem !important;
+  }
+}
